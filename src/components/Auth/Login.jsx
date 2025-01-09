@@ -1,17 +1,22 @@
 import React, { useState } from 'react'
+import { useSelector,useDispatch } from 'react-redux';
+import { login } from '../../context/AuthSlice';
 
 const Login = () => {
 
     const [email,setEmail]=useState('');
     const [password, setPassword]= useState('');
+    const dispatch = useDispatch();
+    const{error}=useSelector(state=>state.user);
 
     const handleSubmit=(e)=>{
         e.preventDefault();
-        console.log("Email: ", email);
-        console.log("Password: ",password);
+        dispatch(login({email,password}));
         setEmail('');
         setPassword('');
     }
+     
+    {error && alert(error)}
 
   return (
     <div className='flex h-screen w-screen items-center justify-center'>
