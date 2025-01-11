@@ -11,7 +11,7 @@ const TaskList = () => {
         {
             loggedInUser && loggedInUser.tasks.map((task,i)=>{
                 return (
-                    <div key={i} className='relative flex-shrink-0 h-full w-[250px] p-5 md:w-[300px] bg-orange-400 rounded-xl'>
+                    <div key={i} className='flex-shrink-0 h-full w-[250px] p-5 md:w-[300px] bg-orange-400 rounded-xl'>
                         <div className='flex justify-between items-center'>
                             <h3 className='bg-red-600 text-sm px-3 py-1 rounded'>High</h3>
                             <h4 className='text-sm'>{task.taskDate}</h4>
@@ -20,10 +20,35 @@ const TaskList = () => {
                         <p className='text-sm mt-2'>
                           {task.taskDescription}    
                         </p>
-                        <div className='flex mt-4 absolute bottom-10 gap-5'>
-                            <button className='bg-green-500 py-1 px-2 text-sm'>Mark as Complete</button>
-                            <button className='bg-red-500 py-1 px-2 text-sm'>Mark as Failed</button>
-                        </div>
+                        {    
+                             task.newTask?(
+                                <div className='flex mt-4 md:mt-[38%]'>
+                                    <button className='bg-green-500 w-full py-1 px-2 text-sm rounded'>Accept Task</button>
+                                </div>
+                             ):''
+                        }
+                        {
+                            task.active?(
+                                <div className='flex justify-center mt-4 md:mt-[38%] gap-5'>
+                                    <button className='bg-green-500 py-1 px-2 text-sm rounded'>Mark as Complete</button>
+                                    <button className='bg-red-500 py-1 px-2 text-sm rounded'>Mark as Failed</button>
+                                </div>
+                            ):''
+                        }
+                        {    
+                             task.completed?(
+                                <div className='flex justify-center mt-4 md:mt-[38%] '>
+                                    <button className='bg-green-500 w-full py-1 px-2 text-sm rounded'>Completed</button>
+                                </div>
+                             ):''
+                        }
+                        {    
+                             task.failed?(
+                                <div className='flex mt-4 md:mt-[38%] '>
+                                    <button className='bg-red-500 w-full py-1 px-2 text-sm rounded'>Failed</button>
+                                </div>
+                             ):''
+                        }
                     </div>
                 )
             })
